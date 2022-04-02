@@ -1,0 +1,2 @@
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+json-server -w db.json
