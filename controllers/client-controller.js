@@ -40,17 +40,19 @@ const crearNuevaLinea = (nombre, email, id) => {
 const table = document.querySelector('[data-table');
 
 
-clienteService
-.listaClientes()
-.then((data) => {
-    data.forEach(({nombre, email, id}) => {
-        const nuevaLinea = crearNuevaLinea(nombre, email, id);
-        table.appendChild(nuevaLinea);
-    });
-}).catch((error) => {
-    console.log(error)
-});
-
-const eliminarCliente = (id) => {
-  console.log("Eliminar a " + id)
+async function llamarClientes(){
+  try {
+    const data = await clienteService.listaClientes()
+    if (data != null) {
+      data.forEach(({nombre, email, id}) => {
+      const nuevaLinea = crearNuevaLinea(nombre, email, id);
+      table.appendChild(nuevaLinea);
+      })
+    }else{
+      throw new Error();
+    }
+  } catch (error) {
+    
+  }
 }
+llamarClientes();
